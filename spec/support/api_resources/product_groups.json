@@ -1,0 +1,16 @@
+[
+  {
+    "id":1,
+    "name":"Email",
+    "key":"EMAIL",
+    "description":"Serviços de Email",
+    "icon":"https://cdn.iconscout.com/icon/premium/png-256-thumb/email-2030737-1713377.png"
+  },
+  {
+    "id":2,
+    "name":"Cloud",
+    "key":"CLOUD",
+    "description":"Serviços de Armazenamento na Nuvem",
+    "icon":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtmQcrvMHZ0GGZhhYOf65C1Yej2ul24ai_jA&usqp=CAU"
+  }
+]

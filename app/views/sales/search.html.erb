@@ -1,0 +1,21 @@
+
+<h1 class="ls-title-intro ls-ico-search">PROMOCÕES ENCONTRADAS</h1>
+
+<div class="ls-box-filter">
+  <%= form_with url: search_sales_path, method: :get do %>
+    <%= label_tag :q, 'Buscar promoção:' %>
+    <%= text_field_tag :q %>
+    <%= submit_tag 'Pesquisar', class: "ls-btn"%>
+  <% end %>
+</div>
+
+<% if @sales.length > 0 %>
+  <%= render "sales/sales" %>
+<% else %>
+  <div class="ls-box ls-board-box">
+    <div class="ls-box ls-board-box">
+      <h3 style="color:gray">Nenhuma promoção encontrada.</h3>
+    </div>
+  </div>
+<% end %>
+

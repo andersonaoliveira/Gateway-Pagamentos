@@ -1,0 +1,6 @@
+<% unless @product_groups.nil? %>
+  <h1 class="ls-title-intro ls-ico-cart">EDITAR PROMOÇÃO</h1>
+  <%= render 'sales/form' %>
+<% else %>
+  <%= render 'sales/error' %>
+<% end %>

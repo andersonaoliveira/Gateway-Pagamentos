@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      sale: Promoção
+    attributes:
+      sale:
+        name: Nome
+        expiration_date: "Prazo de validade"
+        max_value: "Valor máximo permitido"
+        discount: "Desconto"
+        quantity: "Quantidade"
+        product_group_id: "Produtos"
+        statuses:
+          pending: "Pendente"
+          approved: "Aprovada"
+          disapproved: "Reprovada"

@@ -1,0 +1,48 @@
+<div class='container-fluid'>
+  <% if @sale.errors.any? %>
+  <span>Verifique os campos<span>
+  <ul>
+    <% @sale.errors.full_messages.each do |msg|%>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
+
+<%= form_with(model: @sale) do |form|%>
+  <%= form.hidden_field :admin_id, value: current_admin.id %>
+  <label class="ls-label col-md-4">
+    <%= form.label :name, 'Nome' %>
+    <p class="ls-label-info">Digite o nome da promoção</p>
+    <%= form.text_field(:name) %>
+  </label>
+  <label class="ls-label col-md-4">
+    <%= form.label :expiration_date  %>
+    <p class="ls-label-info">Determine a data limite da promoção</p>
+    <%= form.date_field :expiration_date, as: :date, value: form.object.try(:strftime,"%d/%m/%Y")  %>
+  </label>
+  <label class="ls-label col-md-4">
+    <%= form.label :discount %>
+    <p class="ls-label-info">Escolha o desconto promocional</p> 
+    <%= form.number_field :discount %>
+  </label>
+  <label class="ls-label col-md-4">
+    <%= form.label :max_value %>
+    <p class="ls-label-info">Determine o valor máximo permitido de desconto em R$</p>
+    <%= form.number_field :max_value %>
+  </label>
+  <label class="ls-label col-md-4">
+    <%= form.label :quantity %>
+    <p class="ls-label-info">Número de cupons que serão criados</p>
+    <%= form.number_field :quantity %>
+  </label>
+  <label class="ls-label col-md-4">
+    <%= form.label :product_group_id %>
+    <p class="ls-label-info">Escolha o grupo de produtos</p>
+    <%= form.collection_select :product_group_id, @product_groups, :id, :name %>
+  </label>
+    
+  <div class="ls-actions-btn">
+    <%= form.submit 'Salvar', class: 'ls-btn-lg' %>
+  </div>
+<% end %>

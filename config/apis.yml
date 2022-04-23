@@ -1,0 +1,9 @@
+development:
+  products_api: http://localhost:3002
+  sales_api: http://localhost:3001
+  clients_api: http://localhost:3004
+
+test:
+  products_api: http://localhost:3002
+  sales_api: http://localhost:3001
+  clients_api: http://localhost:3004

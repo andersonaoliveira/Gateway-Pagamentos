@@ -1,0 +1,129 @@
+
+<h1 class="ls-title-intro ls-ico-zoomin" >DETALHES DA COBRANÇA #<%=(@charge.id)%></h1> 
+
+<div class="ls-box ls-board-box">
+
+  <header class="ls-info-header">
+    <% if @charge.pending? %>
+      <h2 class="ls-title-2 col-md-6 ls-ico-bullhorn" style="color: orange;">STATUS PENDENTE</h2>
+      <% #Status:  = Charge.human_enum_name(:status, @charge.status)%>
+      <p>
+      <div class="ls-actions-btn ls-float-right check">
+        <div class="ls-title ls-display-inline-block ">
+          <%= button_to 'Aprovar', approve_charge_path(@charge.id), method: :patch ,  class: 'ls-btn-lg', style: "background-color: green; color: white" %>
+        </div>
+        <div class="ls-title ls-display-inline-block "> 
+          <%= button_to 'Reprovar', reprove_charge_path(@charge.id), method: :get,  class: 'ls-btn-lg', style: "background-color: red; color: white" %>
+        </div>
+      </div>
+    <% elsif @charge.approved?%>
+      <h2 class="ls-title-2 col-md-6 ls-ico-bullhorn" style="color: green;">STATUS APROVADA</h2>
+    <% else %>
+      <h2 class="ls-title-2 col-md-6 ls-ico-bullhorn" style="color: red;">STATUS REPROVADA</h2>
+    <% end %>
+  </header>
+
+  <div id="sending-stats" class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">NÚMERO DO PEDIDO</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= @charge.id_order %></strong>
+        </div>
+      </div>
+    </div>  
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">PLANO CONTRATADO</h6>
+        </div>
+        <div class="ls-box-body">
+          <b style="font-size: x-large;"><%= @charge.product_group_id %></b>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">CPF DO CLIENTE</h6>
+        </div>
+        <div class="ls-box-body">
+          <b style="font-size: x-large;"><%= @charge.client_eni %></b style="font-size: x-large;">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">TOKEN UTILIZADO</h6>
+        </div>
+        <div class="ls-box-body">
+          <b style="font-size: large;"><%= @charge.credit_card_token %></b style="font-size: x-large;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div id="sending-stats" class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">VALOR TOTAL</h6>
+        </div>
+        <div class="ls-box-body">
+          <b style="font-size: x-large;"><%= number_to_currency(@charge.order_value) %></b style="font-size: x-large;">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">CUPON UTILIZADO</h6>
+        </div>
+        <div class="ls-box-body">
+          <b style="font-size: x-large;"><%= @charge.cupom_code %></b style="font-size: x-large;">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">VALOR FINAL</h6>
+        </div>
+        <div class="ls-box-body">
+          <b style="font-size: x-large;"><%= number_to_currency(@charge.total_charge) %></b style="font-size: x-large;">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">PARCELAMENTO</h6>
+        </div>
+        <div class="ls-box-body">
+          <b style="font-size: x-large;"><%= @charge.qty_instalments%>x de <%= number_to_currency(@parcel) %></b style="font-size: x-large;">
+        </div>
+      </div>
+    </div>
+    <% if @charge.status != 'pending' %>
+      <div class="col-sm-6 col-md-3">
+        <div class="ls-box">
+          <div class="ls-box-head">
+            <h6 class="ls-title-4">RETORNO DA TRANSAÇÃO</h6>
+          </div>
+          <div class="ls-box-body">
+            <% if @charge.approved? %>
+              <b style="font-size: x-large;"><%= @charge.return %></b style="font-size: x-large;">
+            <% else @charge.reproved? %>
+              <b style="font-size: x-large;"><%= @return_code %></b style="font-size: x-large;">
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+    

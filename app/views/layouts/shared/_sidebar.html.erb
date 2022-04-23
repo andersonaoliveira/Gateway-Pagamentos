@@ -1,0 +1,30 @@
+
+<aside class="ls-sidebar">
+  <% if admin_signed_in? %>
+    <div class="ls-sidebar-inner">
+      
+      <nav class="ls-menu">
+        <ul>
+          <li><a href="/" class="ls-ico-home" title="Página Inicial">Página Inicial</a></li>
+          <li>
+            <a href="#" class="ls-ico-flag" title="Bandeira">Bandeiras de Cartão</a>
+            <ul>
+              <li><a href=<%=new_card_banner_path%> title="Cadastrar Bandeiras">Cadastrar Bandeira</a></li>
+              <li><a href=<%=card_banners_path%> title="Visualizar Bandeiras">Visualizar Bandeiras</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="ls-ico-cart" title="Promoção">Promoções</a>
+            <ul>
+              <li><a href=<%=new_sale_path%> title="Cadastrar Promoção">Cadastrar Promoção</a></li>
+              <li><a href=<%=sales_path%> title="Visualizar Promoções">Visualizar Promoções</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href=<%=charges_path%> class="ls-ico-windows" title="Cobranças">Visualizar Cobranças</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  <% end %>
+</aside>

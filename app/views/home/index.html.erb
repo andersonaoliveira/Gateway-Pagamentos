@@ -1,0 +1,86 @@
+
+<h1 class="ls-title-intro ls-ico-home">GATEWAY DE PAGAMENTOS</h1>
+
+<div class= "ls-box">
+  <p>
+    <% if @api_clientes %>
+      <span class="ls-ico-earth api_success"></span>
+    <% else %>
+      <span class="ls-ico-earth api_error"></span>
+    <% end %>
+    API de Painel de Clientes
+  </p>
+  <p>
+    <% if @api_vendas %>
+      <span class="ls-ico-earth api_success"></span>
+    <% else %>
+      <span class="ls-ico-earth api_error"></span>
+    <% end %>
+    API de Sistema de Vendas
+  </p>
+  <p>
+    <% if @api_produtos %>
+      <span class="ls-ico-earth api_success"></span>
+    <% else %>
+      <span class="ls-ico-earth api_error"></span>
+    <% end %>
+    API de Gestão de Produtos
+  </p>
+</div>
+
+<h2 class="ls-title-intro ls-ico-info" id="pendencias" style="color: red;">PENDÊNCIAS</h2>
+<div class="row">
+  <div class="col-md-6">
+    <div class="ls-box">
+      <header class="ls-info-header">
+        <h2 class="ls-title-3">Promoções Pendentes</h2>
+        <a href="/sales" class="ls-btn ls-btn-sm">Ver todas</a>
+      </header>
+
+      <table class="ls-table ls-table-striped ls-bg-header">
+        <thead>
+          <th>Nome da Promoção</th>
+          <th>Data de Validade</th>
+        </thead>
+        <tbody>
+          <% @sales.each do |sale| %>
+            <tr id="sale-<%= sale.id %>">
+              <td class="Sale">
+                <a href=<%= sale_path(sale.id)%> ><%= sale.name %></a>
+              </td>
+              <td class="Validade">
+                <%= sale.expiration_date.strftime("%d/%m/%Y") %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="ls-box">
+      <header class="ls-info-header">
+        <h2 class="ls-title-3">Cobranças Pendentes</h2>
+        <a href="/charges" class="ls-btn ls-btn-sm">Ver todas</a>
+      </header>
+
+      <table class="ls-table ls-table-striped ls-bg-header">
+        <thead>
+          <th>Ordem de Cobrança</th>
+          <th>Número do Pedido</th>
+          <th>CPF do Cliente</th>
+        </thead>
+        <tbody>
+          <% @charges.each do |charge| %>
+          <tr id="charge-<%= charge.id %>">
+            <td><a><%= link_to (charge.id), charge_path(charge.id) %></a></td>
+            <td><%= charge.id_order %></td>
+            <td><%= charge.client_eni %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+

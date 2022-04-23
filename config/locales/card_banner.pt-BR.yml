@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      card_banner: Bandeira do cartão
+    attributes:
+      card_banner:
+        name: "Nome"
+        max_instalments: "Número máximo de parcelas"
+        percentual_tax: "Taxa percentual"
+        max_tax: "Valor máximo da taxa em reais"
+        discount: "Percentual de desconto para pagamento à vista"
+        icon: "Ícone"
+        statuses:
+          active: "Ativada"
+          inactive: "Desativada"

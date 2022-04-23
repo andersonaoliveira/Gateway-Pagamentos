@@ -1,0 +1,38 @@
+<div class="ls-box-filter">
+  <%= form_with url: search_charges_path, method: :get do %>
+    <%= label_tag :q, 'Buscar Cobranças:' %>
+    <%= text_field_tag :q, "", placeholder: "CPF do cliente" %>
+    <%= submit_tag 'Pesquisar', class: "ls-btn"%>
+  <% end %>
+</div>
+
+<% if @charges.any? %>
+  <h1 class="ls-title-intro ls-ico-list">COBRANÇAS CLIENTE # <%= @charges[0].client_eni %></h1>
+
+  <table class="ls-table ls-table-striped ls-bg-header">
+      <thead>
+        <tr>
+          <th>Ordem de Cobrança</th>
+          <th>Número do Pedido</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>  
+        <% @charges.each do |charge| %>
+          <tr id="charge-<%= charge.id %>">
+            <td><a><%= link_to (charge.id), charge_path(charge.id) %></a></td>
+            <td><%= charge.id_order %></td>
+            <td><%= Charge.human_enum_name(:status, charge.status)%></td>
+            <td><a><%= link_to 'Ver detalhes', charge_path(charge.id) %></a></td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+
+<% else %>
+  <div class="ls-box">
+    <h3 style="color:gray">Não foram encontradas cobranças na pesquisa!</h3>
+  </div>
+<% end %>
+  

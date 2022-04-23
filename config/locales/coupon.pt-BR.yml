@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      coupon: Cupom
+    attributes:
+      coupon:
+        code: Código
+        sale_id: Promoção
+        statuses:
+          unused: Disponível
+          used: Utilizado

@@ -1,0 +1,28 @@
+<table class="ls-table ls-table-striped ls-bg-header">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Validade</th>
+      <th>Criada por</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sales.each do |sale| %>
+      <tr id="sale-<%= sale.id %>">
+        <td class="Sale">
+          <a href=<%= sale_path(sale.id)%> ><%= sale.name %></a>
+        </td>
+        <td class="Validade">
+          <%= sale.expiration_date.strftime("%d/%m/%Y") %>
+        </td>
+        <td class="Criada">
+          <%= ((Admin.find(sale.admin_id)).email).split("@").first.upcase %>
+        </td>
+        <td class="Status">
+          <%= Sale.human_enum_name(:status, sale.status)%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

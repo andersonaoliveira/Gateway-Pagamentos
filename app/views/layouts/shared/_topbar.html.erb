@@ -1,0 +1,40 @@
+<div class="ls-topbar ">
+
+  <!-- Barra de Notificações -->
+  <div class="ls-notification-topbar">    
+    
+  <!-- Dropdown com detalhes da conta de usuário -->
+
+    <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+      <% if admin_signed_in? %>
+        <a href="#" class="ls-ico-user">
+          <span class="ls-name">
+            <% if admin_signed_in? %>
+              <%= (current_admin.email).split("@").first %>
+            <% end %>
+          </span>
+        </a>
+        <nav class="ls-dropdown-nav ls-user-menu">
+          <ul>
+            <%= link_to 'Sair', destroy_admin_session_path, method: :delete %>
+          </ul>
+        </nav>
+      <% end %>
+    
+    </div>
+
+  </div>
+
+  <span class="ls-show-sidebar ls-ico-menu"></span>
+
+  <a href="javascript:history.back()" class="ls-go-next"><span class="ls-text">Voltar</span></a>
+
+  <!-- Nome do produto/marca com sidebar -->
+  <h1 class="ls-brand-name">
+    <a href="/" class="ls-ico-globe" title="Início">
+      <small>QSD7</small>
+      Gateway de Pagamentos
+    </a>
+  </h1>
+  <!-- Nome do produto/marca sem sidebar quando for o pre-painel  -->
+</div>

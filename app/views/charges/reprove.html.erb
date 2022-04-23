@@ -1,0 +1,24 @@
+<div class="ls-box ls-board-box">
+  <header class="ls-info-header">
+    <h1>DETALHES DA COBRANÇA # <%=(@charge.id)%></h1> 
+  </header>
+  <h2>Pedido: <%= @charge.id_order %></h2>
+  <p>Plano Contratado: <%= @charge.product_group_id%></p>
+  <p>CPF: <%= @charge.client_eni%></p>
+  <p>Token Utilizado: <%= @charge.credit_card_token%></p>
+  <p>Valor Total: <%= number_to_currency(@charge.order_value)%></p>
+  <p>Cupom Utilizado: <%= @charge.cupom_code%></p>
+  <p>Valor Final: <%= number_to_currency(@charge.order_value)%></p>
+  <p>Parcelamento: <%= @charge.qty_instalments%> de <%= number_to_currency(@parcel)%></p>
+  <p>Status: <%= Charge.human_enum_name(:status, @charge.status)%></p>
+  
+  
+  <p>Código de Retorno:
+    <%= form_with(url: reprove_msn_charge_path) do |f| %>
+      <div>
+        <%= select_tag(:return, options_for_select(@return_codes)) %>
+        <%= f.submit %>
+      </div>
+    <% end %>
+ </p>
+</div>

@@ -1,0 +1,89 @@
+
+<h1 class="ls-title-intro ls-ico-zoomin">DETALHES DA BANDEIRA <%=(@card_banner.name).upcase%></h1>
+
+<div class="ls-box ls-board-box">
+  <div id="sending-stats" class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">NOME DA BANDEIRA</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= @card_banner.name %></strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">Ícone</h6>
+        </div>
+        <div class="ls-image">
+          <div style="max-height:80%; max-width:170px; overflow: hidden">
+            <strong><%= image_tag @card_banner.icon %></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div id="sending-stats" class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">NÚMERO MÁXIMO DE PARCELAS</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= @card_banner.max_instalments %></strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">DESCONTO PARA COMPRAS À VISTA</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= (@card_banner.discount).to_s.gsub(".",",") %>%</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">TAXA COBRADA</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= (@card_banner.percentual_tax).to_s.gsub(".",",") %>%</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">VALOR MÁXIMO DA TAXA</h6>
+        </div>
+        <div class="ls-box-body">
+          <div class="ls-box-body">
+            <strong>R$ <%= sprintf("%.2f", @card_banner.max_tax).to_s.gsub(".",",") %></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="ls-actions-btn">
+  <div class="ls-display-inline-block ">
+    <% if @card_banner.active? %>
+      <%= button_to 'Desativar', disable_card_banner_path(@card_banner.id),  class: 'ls-btn-lg', style: "background-color: red; color: white"  , method: :patch %>
+    <% elsif @card_banner.inactive?%>
+      <%= button_to 'Ativar', activate_card_banner_path(@card_banner.id),  class: 'ls-btn-lg', style: "background-color: green; color: white",  method: :patch %>
+    <% end %>
+  </div>
+  <div class=" ls-float-right">
+    <div class="ls-display-inline-block">
+      <%= link_to 'Editar', edit_card_banner_path, class: 'ls-btn-lg' %>
+    </div>
+  </div>
+</div> 

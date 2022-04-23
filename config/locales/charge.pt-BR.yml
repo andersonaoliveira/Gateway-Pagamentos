@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      charge: Cobrança
+    attributes:
+      charge:
+        id_order: "Id do pedido"
+        client_eni: "CPF do cliente"
+        credit_card_token: "Token do cartão de crédito"
+        qty_instalments: "Quantidade de parcelas"
+        order_value: "Valor do pedido"
+        cupom_code: "Cupom de desconto"
+        product_group_id: "Id do grupo de produtos"
+        statuses:
+          pending: "Pendente"
+          approved: "Aprovada"
+          reproved: "Reprovada"

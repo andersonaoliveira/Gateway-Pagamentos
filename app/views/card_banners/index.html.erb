@@ -1,0 +1,39 @@
+
+  <h1 class="ls-title-intro ls-ico-flag">BANDEIRAS DE CARTÃO</h1>
+
+  <% if @card_banners.any? %>
+  
+    <table id="card_banners" class="ls-table ls-bg-header"">
+      <thead>
+        <tr>
+          <th>Bandeira</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @card_banners.each do |banner| %>
+            <tr>
+              <td class="Bandeiras">
+                <div title=<%=banner.name%> style="max-height:80%; max-width:80px; overflow: hidden">
+                  <a href=<%= card_banner_path(banner.id)%> class=<%= banner.name %>><%= image_tag banner.icon %></a>
+                </div>
+              </td>
+              <td class="Status">
+                <div>
+                    <%= CardBanner.human_enum_name(:status, banner.status)%>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+
+  <% else %>
+
+    <div class="ls-box">
+      <h3 style="color:gray">Não existem bandeiras cadastradas no sistema</h3>
+    </div>
+
+  <% end %>
+
+

@@ -1,0 +1,37 @@
+<div class="ls-box-filter">
+  <%= form_with url: search_charges_path, method: :get do %>
+    <%= label_tag :q, 'Buscar Cobranças:' %>
+    <%= text_field_tag :q, "", placeholder: "CPF do cliente" %>
+    <%= submit_tag 'Pesquisar', class: "ls-btn"%>
+  <% end %>
+</div>
+
+<div class="ls-display-inline-block ">
+  <%= link_to 'Aprovadas', approved_charges_path, class: "ls-btn" %>
+  <%= link_to 'Reprovadas', reproved_charges_path, class: "ls-btn" %>
+  <%= link_to 'Pendentes', pending_charges_path, class: "ls-btn" %>
+  <%= link_to 'Todas', charges_path, class: "ls-btn" %>
+</div>
+
+<% if @charges.any? %>
+  <table class="ls-table ls-table-striped ls-bg-header">
+    <thead>
+      <tr>
+        <th>Ordem de Cobrança</th>
+        <th>Número do Pedido</th>
+        <th>CPF do Cliente</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>  
+      <% @charges.each do |charge| %>
+        <tr id="charge-<%= charge.id %>">
+          <td><a><%= link_to (charge.id), charge_path(charge.id) %></a></td>
+          <td><%= charge.id_order %></td>
+          <td><%= charge.client_eni %></td>
+          <td><%= Charge.human_enum_name(:status, charge.status)%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

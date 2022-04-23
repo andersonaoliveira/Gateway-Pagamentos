@@ -1,0 +1,41 @@
+
+<h1 class="ls-title-intro ls-ico-search">CUPONS ENCONTRADOS</h1>
+
+<form class="ls-form-inline" action="/search_coupons" accept-charset="UTF-8" method="get">
+  <fieldset class='search'>
+    <input id="search" placeholder="Cupom" type="text" name="query" />
+    <input type="submit" name="commit" value="Buscar" class="ls-btn-primary" data-disable-with="Buscar" />
+  </fieldset>
+</form>
+
+<% if @coupon.length > 0 %>
+
+  <table class="ls-table ls-table-striped ls-bg-header">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @coupons.each do |coupon| %>
+        <tr id="coupon">
+          <td class="code">
+            <%= coupon.code %>
+          </td>
+          <td class="Status">
+            <%= Coupon.human_enum_name :status, coupon.status %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% else %>
+    <div class="ls-box ls-board-box">
+      <div class="ls-box ls-board-box">
+        <h3 style="color:gray">Nenhum cupom encontrado.</h3>
+      </div>
+    </div>
+  <% end %>
+

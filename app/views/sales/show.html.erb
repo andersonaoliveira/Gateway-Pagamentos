@@ -1,0 +1,155 @@
+
+<h1 class="ls-title-intro ls-ico-zoomin">DETALHES DA PROMOÇÃO <%=(@sale.name).upcase%></h1> 
+  
+<div class="ls-box ls-board-box">
+  <header class="ls-info-header">
+    <h2 class="ls-title-2 col-md-6 ls-ico-bullhorn" style="color: red;">
+      STATUS <%= (Sale.human_enum_name(:status, @sale.status)).upcase %>
+      <% if @sale.disapproved? %>
+        <b>#<%= @return_code %></b>
+      <% end %>
+    </h2>
+    <% if @sale.pending? && current_admin != @sale.admin %>
+      <div class="ls-actions-btn ls-float-right">
+        <div class="ls-title ls-display-inline-block ">
+          <%= button_to 'Aprovar', approve_sale_path(@sale.id), method: :patch ,  class: 'ls-btn-lg', style: "background-color: green; color: white" %>
+        </div>
+        <div class="ls-title ls-display-inline-block "> 
+          <%= button_to 'Reprovar', disapprove_sale_path(@sale.id), method: :get,  class: 'ls-btn-lg', style: "background-color: red; color: white" %>
+        </div>
+      </div>
+    <% end %>
+  </header>
+  
+  <div id="sending-stats" class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">NOME DA PROMOÇÃO</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= @sale.name %></strong>
+        </div>
+      </div>
+    </div>
+    <% unless @product_group.nil? %>
+      <div class="col-sm-6 col-md-3">
+        <div class="ls-box">
+          <div class="ls-box-head">
+            <h6 class="ls-title-4">TIPO DE PRODUTO</h6>
+          </div>
+          <div class="ls-box-body">
+            <strong><%= @product_group.name %></strong>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">CRIADA POR</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= (@admin.email).split("@").first.upcase %></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div id="sending-stats" class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">QUANTIDADE DE CUPONS</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= @sale.quantity %></strong>
+        </div>
+      </div>
+    </div>
+        <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">VALIDADE</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= @sale.expiration_date.strftime("%d/%m/%Y") %></strong>
+        </div>
+      </div>
+    </div>  
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">DESCONTO</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong><%= sprintf("%.2f", @sale.discount).to_s.gsub(".",",") %>%</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="ls-box">
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">VALOR MÁXIMO</h6>
+        </div>
+        <div class="ls-box-body">
+          <strong>R$ <%= sprintf("%.2f", @sale.max_value).to_s.gsub(".",",") %></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% if @sale.pending? %>
+  <div class="ls-actions-btn">
+    <%= link_to 'Editar', edit_sale_path, class: 'ls-btn-lg' %>
+  </div>
+<% elsif @sale.approved? & (@coupons.count < @sale.quantity) %>
+  <div class="ls-actions-btn">
+    <%= link_to 'Gerar Cupons', generate_coupons_sale_path(@sale.id),
+        class: 'ls-btn-lg', method: :post %>
+  </div>
+<% end %>
+
+  
+
+<!-- coupons list -->
+
+<% if @coupons.any? %>
+
+  <h1 class="ls-title-intro ls-ico-list">CUPONS DA PROMOÇÃO <%=  @sale.name.upcase  %></h1>
+
+  <!-- buscar cupom -->
+  <div class= "ls-box-filter">
+    <form class="ls-form ls-form-inline" action="/search_coupons" accept-charset="UTF-8" method="get">
+      <fieldset class='search'>
+        <input id="search" placeholder="Cupom" type="text" name="query" />
+        <input type="submit" name="commit" value="Buscar" class="ls-btn-primary" data-disable-with="Buscar" />
+      </fieldset>
+  </form></div>
+
+  <table class="ls-table ls-table-striped ls-bg-header">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% (@coupons).each do |coupon| %>
+        <tr id="coupon">
+          <td class="code">
+            <%= coupon.code %>
+          </td>
+          <td class="Status">
+            <%= Coupon.human_enum_name :status, coupon.status %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
+
+
+

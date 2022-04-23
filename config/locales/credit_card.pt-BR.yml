@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      credit_card: Cartão de crédito
+    attributes:
+      credit_card:
+        card_banner: Bandeira do cartão
+        holder_name: Nome do titular
+        cpf: CPF
+        number: Número
+        valid_date: Data de validade
+        security_code: Código de segurança

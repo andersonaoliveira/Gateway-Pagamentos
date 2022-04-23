@@ -1,0 +1,8 @@
+<h1 class="ls-title-intro ls-ico-windows">COBRANÇAS REPROVADAS</h1>
+<% if @charges.any? %>
+  <%= render partial: 'charges', locals: {charges: @charges} %>
+<% else %>
+  <div class="ls-box">
+    <h3 style="color:gray">Não existem cobranças reprovadas no sistema.</h3>
+  </div>
+<% end %>

@@ -1,0 +1,42 @@
+<h1 class="ls-title-intro ls-ico-zoomin">REPROVAR PROMOÇÃO <%=(@sale.name).upcase%></h1> 
+
+<table class="ls-table ls-table-striped ls-bg-header">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Validade</th>
+      <th>Quantidade de cupons</th>
+      <th>Criada por</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id="sale-<%= @sale.id %>">
+      <td class="Sale">
+        <a href=<%= sale_path(@sale.id)%> ><%= @sale.name %></a>
+      </td>
+      <td class="Validade">
+        <%= @sale.expiration_date.strftime("%d/%m/%Y") %>
+      </td>
+      <td class="Quantidade">
+        <%= @sale.quantity %>
+      </td>
+      <td class="Criada">
+        <%= ((Admin.find(@sale.admin_id)).email).split("@").first.upcase %>
+      </td>
+      <td class="Status">
+        <%= Sale.human_enum_name(:status, @sale.status).upcase%>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  <p>
+    <strong>Motivo da reprovação:</strong> 
+    <%= form_with(url: disapprove_msg_sale_path) do |f| %>
+      <div>
+        <%= select_tag(:return_code, options_for_select(@return_codes)) %>
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </p>

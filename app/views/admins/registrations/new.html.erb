@@ -1,0 +1,49 @@
+<div class="ls-login-parent">
+  <div class="ls-login-inner">
+    <div class="ls-login-container">
+      <div class="ls-login-box">
+        <h1 class="ls-login-logo">
+          <img title="Logo Login" src="https://s3-sa-east-1.amazonaws.com/prod-jobsite-files.kenoby.com/uploads/queroserdev21-1631540701-logo-qsdpng.png">
+        </h1>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        
+          <%= render "admins/shared/error_messages", resource: resource %>
+          <fieldset>
+            <label class="ls-label">
+              <b class="ls-label-text ls-hidden-accessible">E-mail</b>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"ls-field-lg", placeholder: "Email" %>
+            </label>
+
+            <label class="ls-label">
+              <b class="ls-label-text ls-hidden-accessible">Senha</b>
+              <% if @minimum_password_length %>
+                <em>(Use <%= @minimum_password_length %> ou mais caracteres)</em>
+              <% end %>
+              <%= f.password_field :password, autocomplete: "new-password", class: "ls-field-lg", placeholder: "Senha" %>
+            </label>
+
+            <label class="ls-label">
+              <b class="ls-label-text ls-hidden-accessible">Confirme sua senha</b>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "ls-field-lg", placeholder: "Confirme sua senha" %>
+            </label>
+          </fieldset>
+        
+          <div class="actions">
+            <%= f.submit "Inscrever-se", class: "ls-btn-primary ls-btn-block ls-btn-lg" %>
+          </div>
+
+        <% end %>
+        
+        <hr>
+        
+        <div class="ls-btn-primary ls-btn-block ls-btn-lg">
+          <%= link_to "Entrar", new_session_path(resource_name), style: "color: white" %>
+        </div>
+
+          
+      </div>
+    </div>
+  </div>
+</div>
+
+
